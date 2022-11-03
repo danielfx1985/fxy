@@ -138,14 +138,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATABASES = {
     "default": {
-        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.",
+        # Ends with "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.mysql",
         # DB name or path to database file if using sqlite3.
-        "NAME": "",
+        "NAME": "schoolDB",
         # Not used with sqlite3.
-        "USER": "",
+        "USER": "root",
         # Not used with sqlite3.
-        "PASSWORD": "",
+        "PASSWORD": "45855450",
         # Set to empty string for localhost. Not used with sqlite3.
         "HOST": "",
         # Set to empty string for default. Not used with sqlite3.
@@ -222,6 +222,7 @@ TEMPLATES = [
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+   # 'grappelli',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.redirects",
@@ -240,10 +241,10 @@ INSTALLED_APPS = [
     "mezzanine.galleries",
     "stuManage",
     "mysite1",
-    "uploader",
-    "file_upload",
-    "file_download",
-    "videos_uploader",
+    #"uploader",
+    #"file_upload",
+    #"file_download",
+    #"videos_uploader",
 
     # "mezzanine.twitter",
     # 'mezzanine.accounts',

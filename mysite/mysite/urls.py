@@ -18,11 +18,9 @@ admin.autodiscover()
 urlpatterns = [
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path("admin/", include(admin.site.urls)),
-    path("", include("uploader.urls")),
-    path("", include("file_upload.urls")),
-    path("", include("file_download.urls")),
-    path("", include("videos_uploader.urls")),
+    path("stu/", include('stuManage.urls')),
   #  path("uploader/",include('uploader.urls')),
 
 ]
