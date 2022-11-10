@@ -241,6 +241,11 @@ INSTALLED_APPS = [
     "mezzanine.galleries",
     "stuManage",
     "mysite1",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "django_tables2",
+    'widget_tweaks',
+    'django_filters'
     #"uploader",
     #"file_upload",
     #"file_download",
@@ -249,7 +254,9 @@ INSTALLED_APPS = [
     # "mezzanine.twitter",
     # 'mezzanine.accounts',
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
