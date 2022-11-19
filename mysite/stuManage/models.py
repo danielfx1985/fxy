@@ -54,6 +54,20 @@ class student_schoolIfo(models.Model):
     middle_exam=models.BooleanField(default=True)#是否参加中考
     graduate_school=models.CharField(max_length=50)#毕业学校
 
+def IDValidator(value):
+    #身份证号码验证
+     Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+     Ti = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
+     sum = 0
+    #身份证第十八位可能是X，输入时将小写x转换为大写X
+     value = value.upper()
+     if len(value) != 18:
+         raise ValueError('请输入18位身份证号码,您只输入了%s位' % len(value))
+     for i in range(17):
+         sum += int(value[i]) * Wi[i]
+     if Ti[sum%11] != value[17]:
+         raise ValueError('请输入正确的身份证号码')
+
 class student_info(models.Model):
     #基本信息
     objects = models.Manager()
@@ -61,6 +75,9 @@ class student_info(models.Model):
     minzu = models.CharField(max_length=50,default="傣");  # 民族
     birth_date = models.DateTimeField()  # 出生日期
     age = models.IntegerField(default=18)  # 年龄
+    sfid=models.CharField("身份证号码",default="",max_length=18,
+    #unique = True, validators = [IDValidator],
+                          null=True,blank=True)
     tel = models.IntegerField(default=125)  # 联系电话
     adress = models.CharField(max_length=150,default="景洪")  # 地址
     # 宗教信息

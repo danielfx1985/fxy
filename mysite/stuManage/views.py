@@ -12,8 +12,10 @@ from django.views.generic import TemplateView,ListView
 from .tables import StuInfoTable
 from .models import student_baseInfo,student_family,student_religionInfo,student_schoolIfo,student_info
 import logging
-
-
+from rest_framework import serializers,viewsets,generics
+from rest_framework.views import APIView
+from .serializers import student_info_serializer
+from django.http import Http404
 logger = logging.getLogger(__name__)
 def index(request):
     return  render(request,'stuManage/index.html')
@@ -26,10 +28,21 @@ class student_info_ListView(generic.ListView):
     context_object_name='student_info'
     template_name='stuManage/infoList.html'
 
+#class stuInfo_viewSet(viewsets.ModelViewSet):
+ #   queryset = student_info.objects.all()
+  #  serializer_class = student_info_serializer
+
+class stuInfoList_API(viewsets.ModelViewSet):
+    queryset = student_info.objects.all()
+    serializer_class = student_info_serializer
+
+
+
 class student_info_Update(generic.UpdateView):
     model=student_info
+    form_class = addInfoForm
  #   context_object_name='student_info_update'
-    fields = "__all__"
+   # fields = "__all__"
     template_name='stuManage/infoUpate.html'
     success_url = "/stu/add_newstu_success"
 class student_info_Delete(generic.DeleteView):

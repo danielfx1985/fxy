@@ -21,7 +21,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>
+<body class="container-fluid bg-body" style="background-image: url('/static/img/bg-5.fw.png')">
 
 <div class="container-fluid">
 
@@ -31,7 +31,7 @@
 
 
 </div>
-<div class="container-fluid" >
+<div class="container-fluid bg-white" >
 {% block nav %}
 
 {% endblock %}
@@ -40,7 +40,8 @@
 {% block left_sidebar %}
 
 {% endblock %}
-{% block main %}{% endblock %}
+{% block main %}
+{% endblock %}
 <div class="container-fluid" >
 <div class="row" style="margin-left: 0px">
     <div class="col-1" style="padding-left: 0px;padding-right: 0px">

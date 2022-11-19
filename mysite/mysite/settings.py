@@ -245,7 +245,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "django_tables2",
     'widget_tweaks',
-    'django_filters'
+    'django_filters',
+    'rest_framework'
     #"uploader",
     #"file_upload",
     #"file_download",
