@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path,re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views  import index ,addNewStu,add_newstu_success,student_info_ListView,searchStuInfo,export_xlsx,student_info_TableList,student_info_create,student_info_Update,student_info_Delete,stuInfoList_API
+from .views  import index ,addNewStu,add_newstu_success,student_info_ListView,searchStuInfo,export_xlsx,student_info_TableList,student_info_create,student_info_Update,student_info_Delete,stuInfoList_API,export_students_xls
 from rest_framework import routers
 from django.urls import include, path
 stuInfo_list=stuInfoList_API.as_view(
@@ -22,8 +22,10 @@ urlpatterns =[
     path('<pk>/delete',student_info_Delete.as_view(),name='delete'),
     path('add_newstu_success',add_newstu_success,name='add_newstu_success'),
     path('searchStu',searchStuInfo,name='searchStuInfo'),
-    path('export_xlsx',export_xlsx,name='export_xlsx'),
-    path('api/',include(router.urls))
+    #path('<pk>/export_xlsx',export_xlsx,name='export_xlsx'),
+    path('api/',include(router.urls)),
+
+    path('<pk>/export_xls',export_students_xls,name='export_xls'),
   #  re_path('stu_info/',stuInfo_list),
 
    # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

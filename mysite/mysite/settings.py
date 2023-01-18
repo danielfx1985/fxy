@@ -246,7 +246,8 @@ INSTALLED_APPS = [
     "django_tables2",
     'widget_tweaks',
     'django_filters',
-    'rest_framework'
+    'rest_framework',
+    'import_export',
     #"uploader",
     #"file_upload",
     #"file_download",
@@ -255,6 +256,8 @@ INSTALLED_APPS = [
     # "mezzanine.twitter",
     # 'mezzanine.accounts',
 ]
+USE_L10N = False
+DATE_INPUT_FORMATS = ['%Y/%m/%d']
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"

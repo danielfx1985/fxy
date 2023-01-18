@@ -160,26 +160,111 @@
                 </div>
             </div>
             <div id="familyInfo" class="row tab-pane fade justify-content-md-center">
-                <div class="col-md-5">
-                    <ul class="list-group">
-{{ form.relationship5 }}
-                        {% if form.relationship1 == '父亲' %}
-                       333 {{ form.relationship1 }}
-                        {% endif %}
+                {% if form.relationship1.value != '' %}
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-5">
+                            <ul class="list-group">
 
-                        <li class="list-group-item">关系：{{ form.relationship1 }}</li>
-                        <li class="list-group-item">姓名：{{ form.fml_name1 }}</li>
-                        <li class="list-group-item">民族：{{ form.minzhu1 }}</li>
-                        <li class="list-group-item">工作情况：{{ form.job_info1 }}</li>
-                        <li class="list-group-item">电话 ：{{ form.fml_tel1 }}</li>
-                        <li class="list-group-item  ">
-                            <button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()">
-                                +家庭成员
-                            </button>
-                        </li>
-                    </ul>
-                </div>
 
+                                <li class="list-group-item">关系：{{ form.relationship1 }}</li>
+                                <li class="list-group-item">姓名：{{ form.fml_name1 }}</li>
+                                <li class="list-group-item">民族：{{ form.minzhu1 }}</li>
+                                <li class="list-group-item">工作情况：{{ form.job_info1 }}</li>
+                                <li class="list-group-item">电话 ：{{ form.fml_tel1 }}</li>
+                                <li class="list-group-item  ">
+                                    <button type="button" class="btn btn-sm btn-outline-info  float-end"
+                                            onclick="addNewMb()">
+                                        +家庭成员
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+ {% if form.relationship2.value != '' %}
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-5">
+                            <ul class="list-group">
+
+
+                                <li class="list-group-item">关系：{{ form.relationship2 }}</li>
+                                <li class="list-group-item">姓名：{{ form.fml_name2 }}</li>
+                                <li class="list-group-item">民族：{{ form.minzhu2 }}</li>
+                                <li class="list-group-item">工作情况：{{ form.job_info2 }}</li>
+                                <li class="list-group-item">电话 ：{{ form.fml_tel2 }}</li>
+                                <li class="list-group-item  ">
+                                    <button type="button" class="btn btn-sm btn-outline-info  float-end"
+                                            onclick="addNewMb()">
+                                        +家庭成员
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+             {% if form.relationship3.value != '' %}
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-5">
+                            <ul class="list-group">
+
+
+                                <li class="list-group-item">关系：{{ form.relationship3 }}</li>
+                                <li class="list-group-item">姓名：{{ form.fml_name3 }}</li>
+                                <li class="list-group-item">民族：{{ form.minzhu3 }}</li>
+                                <li class="list-group-item">工作情况：{{ form.job_info3 }}</li>
+                                <li class="list-group-item">电话 ：{{ form.fml_tel3 }}</li>
+                                <li class="list-group-item  ">
+                                    <button type="button" class="btn btn-sm btn-outline-info  float-end"
+                                            onclick="addNewMb()">
+                                        +家庭成员
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+             {% if form.relationship4.value != '' %}----{{ form.relationship4.value }}----
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-5">
+                            <ul class="list-group">
+
+
+                                <li class="list-group-item">关系：{{ form.relationship4 }}</li>
+                                <li class="list-group-item">姓名：{{ form.fml_name4 }}</li>
+                                <li class="list-group-item">民族：{{ form.minzhu4 }}</li>
+                                <li class="list-group-item">工作情况：{{ form.job_info4 }}</li>
+                                <li class="list-group-item">电话 ：{{ form.fml_tel4 }}</li>
+                                <li class="list-group-item  ">
+                                    <button type="button" class="btn btn-sm btn-outline-info  float-end"
+                                            onclick="addNewMb()">
+                                        +家庭成员
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+             {% if form.relationship5.value != '' %}
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-5">
+                            <ul class="list-group">
+
+
+                                <li class="list-group-item">关系：{{ form.relationship5 }}</li>
+                                <li class="list-group-item">姓名：{{ form.fml_name5 }}</li>
+                                <li class="list-group-item">民族：{{ form.minzhu5 }}</li>
+                                <li class="list-group-item">工作情况：{{ form.job_info5 }}</li>
+                                <li class="list-group-item">电话 ：{{ form.fml_tel5 }}</li>
+                                <li class="list-group-item  ">
+                                    <button type="button" class="btn btn-sm btn-outline-info  float-end"
+                                            onclick="addNewMb()">
+                                        +家庭成员
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="row justify-content-md-center">
                     <div id="fmy2" class="col-md-5"></div>
                 </div>
@@ -196,7 +281,8 @@
             </div>
 
             <div class="row justify-content-md-center">
-                <div class="col-md-5"><input class="btn btn-success" type="submit" value="更新"></div>
+                <div class="col-md-5"><input class="btn btn-outline-success" type="submit" value="更新"></div>
+            <!--    <div class="col-md-5"><button  onclick="location.href='/stu/{{ form.id }}/export_xls'" type="button" class="  float-end" >导出</button></div>-->
             </div>
 
         </form>
@@ -204,47 +290,48 @@
 
 
     <script>
-
-        a = 2;
-
-        function addNewMb() {
-            var html_;
-            var html2 =
-                '<ul class="list-group">\
-                    <li class="list-group-item">关系：{{ form.relationship2 }}</li>\
+        var html_;
+        var html2 =
+            '<ul class="list-group">\
+                <li class="list-group-item">关系：{{ form.relationship2 }}</li>\
                     <li class="list-group-item">姓名：{{ form.fml_name2 }}</li>\
                     <li class="list-group-item">民族：{{ form.minzhu2 }}</li>\
                     <li class="list-group-item">工作情况：{{ form.job_info2 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel2 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
                 </ul> '
-            var html3 =
-                '<ul class="list-group">\
-                    <li class="list-group-item">关系：{{ form.relationship3 }}</li>\
+        var html3 =
+            '<ul class="list-group">\
+                <li class="list-group-item">关系：{{ form.relationship3 }}</li>\
                     <li class="list-group-item">姓名：{{ form.fml_name3 }}</li>\
                     <li class="list-group-item">民族：{{ form.minzhu3 }}</li>\
                     <li class="list-group-item">工作情况：{{ form.job_info3 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel3 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
                 </ul>'
-            var html4 =
-                '<ul class="list-group">\
-                    <li class="list-group-item">关系：{{ form.relationship4 }}</li>\
+        var html4 =
+            '<ul class="list-group">\
+                <li class="list-group-item">关系：{{ form.relationship4 }}</li>\
                     <li class="list-group-item">姓名：{{ form.fml_name4 }}</li>\
                     <li class="list-group-item">民族：{{ form.minzhu4 }}</li>\
                     <li class="list-group-item">工作情况：{{ form.job_info4 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel4 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
                 </ul>'
-            var html5 =
-                '<ul class="list-group">\
-                    <li class="list-group-item">关系：{{ form.relationship5 }}</li>\
+        var html5 =
+            '<ul class="list-group">\
+                <li class="list-group-item">关系：{{ form.relationship5 }}</li>\
                     <li class="list-group-item">姓名：{{ form.fml_name5 }}</li>\
                     <li class="list-group-item">民族：{{ form.minzhu5 }}</li>\
                     <li class="list-group-item">工作情况：{{ form.job_info5 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel5 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
                 </ul>'
+        a = 2;
+        console.log(html2);
+
+        function addNewMb() {
+
             switch (a) {
                 case 2:
                     html_ = html2;

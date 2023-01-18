@@ -1,5 +1,6 @@
 import requests
 from django.shortcuts import render,redirect
+import xlwt
 from django_tables2 import SingleTableView
 import django_tables2 as tables
 from django_tables2.export.views import ExportMixin
@@ -16,6 +17,9 @@ from rest_framework import serializers,viewsets,generics
 from rest_framework.views import APIView
 from .serializers import student_info_serializer
 from django.http import Http404
+from rest_framework import status
+from rest_framework.response import Response
+import datetime
 logger = logging.getLogger(__name__)
 def index(request):
     return  render(request,'stuManage/index.html')
@@ -36,7 +40,33 @@ class stuInfoList_API(viewsets.ModelViewSet):
     queryset = student_info.objects.all()
     serializer_class = student_info_serializer
 
+class studentifoDetail(APIView):
+    """
+    Retrieve, update or delete an article instance.
+    """
+    def get_object(self, pk):
+        try:
+            return student_info.objects.get(pk=pk)
+        except student_info.DoesNotExist:
+            raise Http404
 
+    def get(self, request, pk, format=None):
+        studentifo = self.get_object(pk)
+        serializer = student_info_serializer(studentifo)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        studentifo = self.get_object(pk)
+        serializer = student_info_serializer(instance=studentifo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        studentifo = self.get_object(pk)
+        studentifo.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class student_info_Update(generic.UpdateView):
     model=student_info
@@ -151,3 +181,34 @@ def export_xlsx(request):
         table = student_info
         exporter = TableExport(export_format, table)
         return exporter.response('table.{}'.format(export_format))
+
+
+
+def export_students_xls(request,pk):
+    print(pk)
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="users.xls"'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('student')
+    # Sheet header, first row
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ['姓名', '民族', '出生日期','年龄','身份证号','联系电话','家庭住址','法名','教职身份','教职人员编号','出家年月','出家寺院',
+               '戒师','年级','学号（国民教育）','学号（宗教学籍）','学历层次','学生类别','学制','入学日期','是否参加中考','毕业学校']
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+    rows = student_info.objects.filter(id=pk).all().values_list('name', 'minzu','birth_date', 'age','sfid','tel','adress','dhamma_name',
+                                                                'title2','teacher_id','monk_date','monk_date','sila_teacher','grade','base_id',
+                                                                'religion_id','study_level','student_type','school_lenth','enrol_date','middle_exam','graduate_school')
+    print(rows)
+    rows = [[x.strftime("%Y-%m-%d") if isinstance(x, datetime.datetime) else x for x in row] for row in rows]
+     #??????
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+    wb.save(response)
+    return response
