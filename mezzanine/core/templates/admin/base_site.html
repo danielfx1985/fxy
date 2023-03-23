@@ -1,9 +1,10 @@
 {% extends "admin/base.html" %}
 {% load mezzanine_tags i18n static static %}
 
-{% block title %}{{ title }} | Mezzanine{% endblock %}
+{% block title %}{{ title }} | 佛学院管理系统后台{% endblock %}
 
 {% block extrahead %}
+
 {% if user.is_staff %}<script src="{% url 'admin:jsi18n' %}"></script>{% endif %}
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 

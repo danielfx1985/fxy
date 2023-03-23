@@ -3,8 +3,8 @@
 {% load querystring from django_tables2 %}
 {% block nav %}
 
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <nav class="justify-content-center ">
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#basicInfo"
                     type="button" role="tab" aria-controls="nav-home" aria-selected="true">基本信息
             </button>
@@ -18,74 +18,22 @@
                     type="button"
                     role="tab" aria-controls="nav-contact" aria-selected="false">家庭信息
             </button>-->
-          <!--  <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#fileInfo"
-                    type="button"
-                    role="tab" aria-controls="nav-contact" aria-selected="false">档案文件下载
-            </button>-->
+            <!--  <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#fileInfo"
+                      type="button"
+                      role="tab" aria-controls="nav-contact" aria-selected="false">档案文件下载
+              </button>-->
             <form method="get" class="d-flex" role="search" action="/stu/searchStu">
                 <input name="q" class="form-control-sm me-2" type="search" placeholder="输入学生姓名搜索" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">搜索</button>
             </form>
+            <button class="btn btn-outline-success" type="submit">高级搜索</button>
             <span>  &nbsp;  </span><a class="btn btn-outline-success" href="/stu/student_info"> 所有学生</a>
             <span>  &nbsp;  </span><a class="btn btn-outline-success" href="/stu/add"> 录入新学生</a>
+            <button class="btn btn-outline-success" type="submit">全部导出</button>
             <a class="d-none" href="/stu/export_xlsx">Download --XLSX</a>
 
         </div>
     </nav>
-{% endblock %}
-{% block left_title %}
-    <script>
-
-
-
-        $(document).ready(function () {
-
-            window.onload = function () {
-                // $('td').children("button").hide();
-
-            }
-            $('td').mouseover(function () {
-                $(this).children("button").removeAttr('hidden');
-
-            });
-            $('td').mouseout(function () {
-                $(this).children("button").attr("hidden",true);
-
-            });
-        });
-    </script>
-    {% if student_info %}
-
-        <table data-toggle="table" class="bg-white" >
-            <thead>
-            <th>姓名</th>
-
-
-            </thead>
-            {% for col in student_info %}
-                <tr>
-                    <td>
-
-
-                        <a class=" " href="/stu/{{ col.id }}/update" role="button">
-                            {{ col.name }}
-                        </a>
-                      <!--<a href="/stu/{{ col.id }}/export_xls">export</a>-->
-                        <button id="cbtn" onclick="location.href='/stu/{{ col.id }}/delete'" hidden type="button" class=" btn-close float-end" aria-label="Close"></button>
-
-                    </td>
-
-
-                </tr>
-                <div class="collapse" id="{{ col.name }}">
-                    <div class="card card-body">
-                        {{ col.name }}
-                    </div>
-                </div>
-            {% endfor %}
-        </table>
-    {% endif %}
-
 {% endblock %}
 {% block main_list %}
 
@@ -98,27 +46,32 @@
 
                 <table data-toggle="table">
                     <thead>
-
+                    <th>姓名</th>
 
                     <th>民族</th>
                     <th>出生日期</th>
                     <th>年龄</th>
                     <th>电话</th>
- <th>身份证号</th>
+                    <th>身份证号</th>
+                    <th>户口类型</th>
                     <th>家庭住址</th>
-
+                    <th>操作</th>
 
                     </thead>
                     {% for col in student_info %}
                         <tr>
+                            <td><a class=" " href="/stu/{{ col.id }}/print" role="button">
+                                {{ col.name }}
+                            </a></td>
                             <td>{{ col.minzu }}</td>
-                            <td>{{ col.birth_date }}</td>
+                            <td>{{ col.birth_date|date:'Y-m-d' }}</td>
                             <td>{{ col.age }}</td>
                             <td>{{ col.tel }}</td>
                             <td>{{ col.sfid }}</td>
-
+                            <td>{{ col.hukou }}</td>
 
                             <td>{{ col.adress }}</td>
+                            <td><a>修改 </a><a href="/stu/{{ col.id }}/delete"> 删除</a><a> 导出 </a></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -128,24 +81,27 @@
             {% if student_info %}
                 <table data-toggle="table">
                     <thead>
-
+                    <th>姓名</th>
                     <th>法名</th>
                     <th>教职身份</th>
                     <th>教职人员编号</th>
                     <th>出家年月</th>
                     <th>出家寺院</th>
                     <th>戒师</th>
+                    <th>操作</th>
                     </thead>
                     {% for col in student_info %}
                         <tr>
-
+                            <td><a class=" " href="/stu/{{ col.id }}/print" role="button">
+                                {{ col.name }}
+                            </a></td>
                             <td>{{ col.dhamma_name }}</td>
                             <td>{{ col.title2 }}</td>
                             <td>{{ col.teacher_id }}</td>
-                            <td>{{ col.monk_date }}</td>
+                            <td>{{ col.monk_date |date:'Y-m-d'}}</td>
                             <td>{{ col.monk_temple }}</td>
                             <td>{{ col.sila_teacher }}</td>
-
+                            <td><a>修改 </a><a href="/stu/{{ col.id }}/delete"> 删除</a><a> 导出 </a></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -155,7 +111,7 @@
             {% if student_info %}
                 <table data-toggle="table">
                     <thead>
-
+                    <th>姓名</th>
                     <th>年级</th>
                     <th>学号（国民教育）</th>
                     <th>学号（宗教教育）</th>
@@ -165,30 +121,33 @@
                     <th>入学日期</th>
                     <th>是否参加中考</th>
                     <th>毕业学校</th>
+                    <th>操作</th>
                     </thead>
                     {% for col in student_info %}
                         <tr>
-
+                            <td><a class=" " href="/stu/{{ col.id }}/print" role="button">
+                                {{ col.name }}
+                            </a></td>
                             <td>{{ col.grade }}</td>
                             <td>{{ col.base_id }}</td>
                             <td>{{ col.religion_id }}</td>
                             <td>{{ col.study_level }}</td>
                             <td>{{ col.student_type }}</td>
                             <td>{{ col.school_lenth }}</td>
-                            <td>{{ col.enrol_date }}</td>
+                            <td>{{ col.enrol_date|date:'Y-m-d' }}</td>
                             <td>{{ col.middle_exam }}</td>
                             <td>{{ col.graduate_school }}</td>
-
+                            <td><a>修改 </a><a href="/stu/{{ col.id }}/delete"> 删除 </a><a> 导出 </a></td>
                         </tr>
                     {% endfor %}
                 </table>
             {% endif %}
         </div>
-    <div class="tab-pane fade" id="shoolInfo" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div class="tab-pane fade" id="shoolInfo" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
             {% if student_info %}
                 <table data-toggle="table">
                     <thead>
-
+                    <th>姓名</th>
                     <th>年级</th>
                     <th>学号（国民教育）</th>
                     <th>学号（宗教教育）</th>
@@ -198,20 +157,23 @@
                     <th>入学日期</th>
                     <th>是否参加中考（是/否）</th>
                     <th>毕业学校</th>
+                    <th>操作</th>
                     </thead>
                     {% for col in student_info %}
                         <tr>
-
+                            <td><a class=" " href="/stu/{{ col.id }}/print" role="button">
+                                {{ col.name }}
+                            </a></td>
                             <td>{{ col.grade }}</td>
                             <td>{{ col.base_id }}</td>
                             <td>{{ col.religion_id }}</td>
                             <td>{{ col.study_level }}</td>
                             <td>{{ col.student_type }}</td>
                             <td>{{ col.school_lenth }}</td>
-                            <td>{{ col.enrol_date }}</td>
+                            <td>{{ col.enrol_date |date:'Y-m-d'}}</td>
                             <td>{{ col.middle_exam }}</td>
                             <td>{{ col.graduate_school }}</td>
-
+                            <td><a>修改 </a><a href="/stu/{{ col.id }}/delete"> 删除</a><a> 导出 </a></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -229,24 +191,28 @@
                         <th>民族</th>
                         <th>单位职务</th>
                         <th>电话</th>
+                        <th>身份证照片</th>
                         <th>家庭成员2</th>
                         <th>关系</th>
                         <th>姓名</th>
                         <th>民族</th>
                         <th>单位职务</th>
                         <th>电话</th>
+                        <th>身份证照片</th>
                         <th>家庭成员3</th>
                         <th>关系</th>
                         <th>姓名</th>
                         <th>民族</th>
                         <th>单位职务</th>
                         <th>电话</th>
+                        <th>身份证照片</th>
                         <th>家庭成员4</th>
                         <th>关系</th>
                         <th>姓名</th>
                         <th>民族</th>
                         <th>单位职务</th>
                         <th>电话</th>
+                        <th>身份证照片</th>
                         <th>家庭成员5</th>
                         <th>关系</th>
                         <th>姓名</th>
@@ -263,26 +229,43 @@
                                 <td>{{ col.minzhu1 }}</td>
                                 <td>{{ col.job_info1 }}</td>
                                 <td>{{ col.fml_tel1 }}</td>
+                                <td>{{ col.jml_id1 }}</td>
+                                <td>{{ col.jml_id_f1 }}</td>
+                                <td>{{ col.jml_id_b1 }}</td>
+
                                 <td>{{ col.relationship2 }}</td>
                                 <td>{{ col.fml_name2 }}</td>
                                 <td>{{ col.minzhu2 }}</td>
                                 <td>{{ col.job_info2 }}</td>
                                 <td>{{ col.fml_tel2 }}</td>
+                                <td>{{ col.jml_id2 }}</td>
+                                <td>{{ col.jml_id_f2 }}</td>
+                                <td>{{ col.jml_id_b2 }}</td>
+
                                 <td>{{ col.relationship3 }}</td>
                                 <td>{{ col.fml_name3 }}</td>
                                 <td>{{ col.minzhu3 }}</td>
                                 <td>{{ col.job_info3 }}</td>
                                 <td>{{ col.fml_tel3 }}</td>
+                                <td>{{ col.jml_id3 }}</td>
+                                <td>{{ col.jml_id_f3 }}</td>
+                                <td>{{ col.jml_id_b3 }}</td>
+
                                 <td>{{ col.relationship4 }}</td>
                                 <td>{{ col.fml_name4 }}</td>
                                 <td>{{ col.minzhu4 }}</td>
                                 <td>{{ col.job_info4 }}</td>
                                 <td>{{ col.fml_tel4 }}</td>
+                                <td>{{ col.jml_id_f4 }}</td>
+                                <td>{{ col.jml_id_b4 }}</td>
+
                                 <td>{{ col.relationship5 }}</td>
                                 <td>{{ col.fml_name5 }}</td>
                                 <td>{{ col.minzhu5 }}</td>
                                 <td>{{ col.job_info5 }}</td>
                                 <td>{{ col.fml_tel5 }}</td>
+                                <td>{{ col.jml_id_f5 }}</td>
+                                <td>{{ col.jml_id_b5 }}</td>
 
                             </tr>
                         {% endfor %}
@@ -291,7 +274,7 @@
             </div>
         {% endcomment %}
 
-   <div class="tab-pane fade" id="fileInfo" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div class="tab-pane fade" id="fileInfo" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
             {% if student_info %}
                 <table data-toggle="table">
                     <thead>
@@ -323,5 +306,23 @@
             {% endif %}
         </div>
     </div>
+    {% if is_paginated %}
+        <div class="pagination justify-content-center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 第一页</a>
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">最后页 &raquo;</a>
+        {% endif %}
+    </span>
+        </div>
+    {% endif %}
 {% endblock %}

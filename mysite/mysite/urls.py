@@ -1,11 +1,11 @@
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path,re_path
 from django.views.generic import TemplateView
 from django.views.i18n import set_language
 
 from mezzanine.conf import settings
-
+from . import views
 # Uncomment to use blog as home page. See also urlpatterns section below.
 # from mezzanine.blog import views as blog_views
 
@@ -17,10 +17,14 @@ admin.autodiscover()
 
 urlpatterns = [
     # Change the admin prefix here to use an alternate URL for the
-    # admin interface, which would be marginally more secure.
+    # admin
+    #
+    # interface, which would be marginally more secure.
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path("admin/", include(admin.site.urls)),
     path("stu/", include('stuManage.urls')),
+    path('start/',views.start,name='start'),
+#re_path("^stu/", include('stuManage.urls')),
   #  path("uploader/",include('uploader.urls')),
 
 ]
@@ -38,6 +42,7 @@ urlpatterns += [
     # commented out like the others, so it's the default. You only need
     # one homepage pattern, so if you use a different one, comment this
     # one out.
+path("c5", TemplateView.as_view(template_name="indexCSS5.html"), name="home"),
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------

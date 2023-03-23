@@ -1,7 +1,7 @@
 {% extends 'stuManage/base.html' %}
 {% load crispy_forms_tags %}
 {% block main %}
-    <!--<div class="container">
+    <!--<div class="container">{{ student_info.birth_date|date:'Y年m月d日' }}
         <div class="row row-cols-2">
             <div class="col">姓名:</div>
             <div class="col">{{ form.name }}</div>
@@ -12,7 +12,13 @@
     <!--  <form>{{ form|crispy}}</form>-->
 
     <div class="container bg-white ">
-        <div class="row-cols-auto"><h1 class="text-center">学生信息更新</h1></div>
+        <nav class="row justify-content-xl-center" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb col-4 fs-4">
+                <li class="breadcrumb-item"><a href="{% url 'student_info' %}">教务管理系统</a></li>
+
+                <li class="breadcrumb-item active" aria-current="page">更新学生信息</li>
+            </ol>
+        </nav>
         <nav>
             <div class="nav nav-tabs justify-content-md-center" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-basicInfo-tab" data-bs-toggle="tab" data-bs-target="#basicInfo"
@@ -181,7 +187,7 @@
                         </div>
                     </div>
                 {% endif %}
- {% if form.relationship2.value != '' %}
+                {% if form.relationship2.value != '' %}
                     <div class="row justify-content-md-center">
                         <div class="col-md-5">
                             <ul class="list-group">
@@ -202,7 +208,7 @@
                         </div>
                     </div>
                 {% endif %}
-             {% if form.relationship3.value != '' %}
+                {% if form.relationship3.value != '' %}
                     <div class="row justify-content-md-center">
                         <div class="col-md-5">
                             <ul class="list-group">
@@ -223,7 +229,7 @@
                         </div>
                     </div>
                 {% endif %}
-             {% if form.relationship4.value != '' %}----{{ form.relationship4.value }}----
+                {% if form.relationship4.value != '' %}----{{ form.relationship4.value }}----
                     <div class="row justify-content-md-center">
                         <div class="col-md-5">
                             <ul class="list-group">
@@ -244,7 +250,7 @@
                         </div>
                     </div>
                 {% endif %}
-             {% if form.relationship5.value != '' %}
+                {% if form.relationship5.value != '' %}
                     <div class="row justify-content-md-center">
                         <div class="col-md-5">
                             <ul class="list-group">
@@ -282,7 +288,7 @@
 
             <div class="row justify-content-md-center">
                 <div class="col-md-5"><input class="btn btn-outline-success" type="submit" value="更新"></div>
-            <!--    <div class="col-md-5"><button  onclick="location.href='/stu/{{ form.id }}/export_xls'" type="button" class="  float-end" >导出</button></div>-->
+                <!--    <div class="col-md-5"><button  onclick="location.href='/stu/{{ form.id }}/export_xls'" type="button" class="  float-end" >导出</button></div>-->
             </div>
 
         </form>

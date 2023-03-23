@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path,re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views  import index ,addNewStu,add_newstu_success,student_info_ListView,searchStuInfo,export_xlsx,student_info_TableList,student_info_create,student_info_Update,student_info_Delete,stuInfoList_API,export_students_xls
+from django.views.generic import TemplateView
+from .views  import one_info,index ,export_xls,addNewStu,add_newstu_success,student_info_ListView,searchStuInfo,export_xlsx,student_info_TableList,student_info_create,student_info_Update,student_info_Delete,stuInfoList_API,export_students_xls
 from rest_framework import routers
 from django.urls import include, path
 stuInfo_list=stuInfoList_API.as_view(
@@ -13,11 +14,14 @@ router = routers.DefaultRouter()
 router.register(r'stu_info', viewset=stuInfoList_API)
 
 urlpatterns =[
+    #path("/", TemplateView.as_view(template_name="stu_info_table.html"), name="stu_info_table"),
+    path('export_xls', export_xls ),
     path('',index,name='index'),
     path('student_info/',student_info_ListView.as_view(),name='student_info'),
     path('student_info_table/',student_info_TableList,name='student_info_table'),
   #  path('add/',addNewStu,name='add'),
     path('add/',student_info_create.as_view(),name='add'),
+    path('<int:pk>/print',one_info.as_view(),name='print'),
     path('<pk>/update',student_info_Update.as_view(),name='update'),
     path('<pk>/delete',student_info_Delete.as_view(),name='delete'),
     path('add_newstu_success',add_newstu_success,name='add_newstu_success'),

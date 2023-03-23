@@ -100,7 +100,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 TIME_ZONE = "Asia/Shanghai"
 
 # If you set this to True, Django will use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -112,7 +112,7 @@ LANGUAGES = (("zh-hans", _("Simplified Chinese")),)
 # A boolean that turns on/off debug mode. When set to ``True``, stack traces
 # are displayed for error pages. Should always be set to ``False`` in
 # production. Best set to ``True`` in local_settings.py
-DEBUG = False
+DEBUG = True
 
 # Whether a user's session cookie expires when the Web browser is closed.
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -189,11 +189,12 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, MEDIA_URL.strip("/"))
 
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
-
+print(PROJECT_ROOT)
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(PROJECT_ROOT, "templates")],
+
         "OPTIONS": {
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
@@ -248,6 +249,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'import_export',
+
     #"uploader",
     #"file_upload",
     #"file_download",

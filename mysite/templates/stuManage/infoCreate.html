@@ -1,6 +1,7 @@
 {% extends 'stuManage/base.html' %}
 {% load crispy_forms_tags %}
 {% block main %}
+
     <!--<div class="container">
         <div class="row row-cols-2">
             <div class="col">姓名:</div>
@@ -12,7 +13,14 @@
     <!--  <form>{{ form|crispy}}</form>-->
 
     <div class="container bg-white ">
-        <div class="row-cols-auto"><h1 class="text-center">学生信息录入</h1></div>
+
+        <nav class="row justify-content-xl-center" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb col-4 fs-4">
+                <li class="breadcrumb-item"><a href="{% url 'student_info' %}">教务管理系统</a></li>
+
+                <li class="breadcrumb-item active" aria-current="page">录入新学生信息</li>
+            </ol>
+        </nav>
         <nav>
             <div class="nav nav-tabs justify-content-md-center" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-basicInfo-tab" data-bs-toggle="tab" data-bs-target="#basicInfo"
@@ -93,7 +101,7 @@
 
             });
         </script>
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form name="form" method="post" enctype="multipart/form-data">{% csrf_token %}
 
             <div id="basicInfo" class="row fade active show tab-pane justify-content-md-center">
 
@@ -101,12 +109,13 @@
                     <ul class="list-group ">
                         <!--  <li class="list-group-item bg-warning">基本信息</li>-->
 
-                        <li class="list-group-item"> 姓名：{{ form.name }}</li>
+                        <li class="list-group-item"> 姓名：{{ form.name}}</li>
                         <li class="list-group-item">民族：{{ form.minzu }}</li>
                         <li class="list-group-item">出生日期：{{ form.birth_date }}</li>
                         <li class="list-group-item">年龄：{{ form.age }}</li>
                         <li class="list-group-item">身份证：{{ form.sfid }}</li>
-                        <li class="list-group-item">电话：{{ form.tel }}</li>
+                        <li name="tel" class="list-group-item">电话：{{ form.tel }}</li>
+                        <li class="list-group-item">户口类型：{{ form.hukou }}</li>
                         <li class="list-group-item">地址：{{ form.adress }}</li>
 
                     </ul>
@@ -169,6 +178,8 @@
                         <li class="list-group-item">民族：{{ form.minzhu1 }}</li>
                         <li class="list-group-item">工作情况：{{ form.job_info1 }}</li>
                         <li class="list-group-item">电话 ：{{ form.fml_tel1 }}</li>
+                        <li class="list-group-item">身份证照片国徽面：{{ form.fml_id_f1 }}</li>
+<li class="list-group-item">身份证照片人像面：{{ form.fml_id_b1 }}</li>
                         <li class="list-group-item  ">
                             <button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()">
                                 +家庭成员
@@ -189,6 +200,7 @@
                 <div class="row justify-content-md-center">
                     <div id="fmy5" class="col-md-5"></div>
                 </div>
+
 
             </div>
 
@@ -214,7 +226,10 @@
                     <li class="list-group-item">工作情况：{{ form.job_info2 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel2 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
+                    <li class="list-group-item">身份证照片国徽面：{{ form.fml_id_f2 }}</li>\
+<li class="list-group-item">身份证照片人像面：{{ form.fml_id_b2 }}</li>\
                 </ul> '
+
             var html3 =
                 '<ul class="list-group">\
                     <li class="list-group-item">关系：{{ form.relationship3 }}</li>\
@@ -223,6 +238,8 @@
                     <li class="list-group-item">工作情况：{{ form.job_info3 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel3 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
+                    <li class="list-group-item">身份证照片国徽面：{{ form.fml_id_f3 }}</li>\
+<li class="list-group-item">身份证照片人像面：{{ form.fml_id_b3 }}</li>\
                 </ul>'
             var html4 =
                 '<ul class="list-group">\
@@ -232,6 +249,8 @@
                     <li class="list-group-item">工作情况：{{ form.job_info4 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel4 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
+                    <li class="list-group-item">身份证照片国徽面：{{ form.fml_id_f4 }}</li>\
+<li class="list-group-item">身份证照片人像面：{{ form.fml_id_b4 }}</li>\
                 </ul>'
             var html5 =
                 '<ul class="list-group">\
@@ -241,6 +260,8 @@
                     <li class="list-group-item">工作情况：{{ form.job_info5 }}</li>\
                     <li class="list-group-item">电话 ：{{ form.fml_tel5 }}</li>\
                     <li class="list-group-item"><button type="button" class="btn btn-sm btn-outline-info  float-end" onclick="addNewMb()"> +家庭成员 </button></li>\
+                    <li class="list-group-item">身份证照片国徽面：{{ form.fml_id_f5 }}</li>\
+<li class="list-group-item">身份证照片人像面：{{ form.fml_id_b5 }}</li>\
                 </ul>'
             switch (a) {
                 case 2:
@@ -260,6 +281,12 @@
             document.getElementById('fmy' + a).innerHTML = html_;
             a++;
 
+        }
+
+        function validateForm(){
+            var x=document.forms['form']['tel'].value;
+
+            alert(x)
         }
     </script>
 {% endblock %}

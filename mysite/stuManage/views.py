@@ -9,9 +9,9 @@ from .forms import addBaseInfoForm,addFamilyInfoForm,addInfoForm
 # Create your views here.
 from django.http import HttpResponse
 from django.views import generic
-from django.views.generic import TemplateView,ListView
+from django.views.generic import TemplateView,ListView,DetailView
 from .tables import StuInfoTable
-from .models import student_baseInfo,student_family,student_religionInfo,student_schoolIfo,student_info
+from .models import student_baseInfo,student_family,student_religionInfo,student_schoolIfo,student_info,books
 import logging
 from rest_framework import serializers,viewsets,generics
 from rest_framework.views import APIView
@@ -20,6 +20,20 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 import datetime
+import django_excel as excel
+from django.db.models import F
+import pyexcel
+
+def export_xls(request):
+    if request.method=="GET":
+        print("requets=GET: " ,request.GET.get('name'))
+
+   # print(" self  :  ",self.request)
+    data_excel=student_info.objects.filter(name='王宗仁')#.annotate(new_name=F('name')).values('姓名')
+    col_names=["name","minzu","birth_date","age","tel","adress","dhamma_name","title2","teacher_id"]
+    return excel.make_response_from_query_sets(data_excel,col_names,'xlsx',status=200,file_name='tests')
+   ## return excel.make_response_from_a_table(books,'xls',status=200,file_name='tests')
+
 logger = logging.getLogger(__name__)
 def index(request):
     return  render(request,'stuManage/index.html')
@@ -67,6 +81,12 @@ class studentifoDetail(APIView):
         studentifo = self.get_object(pk)
         studentifo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class one_info(DetailView):
+    model = student_info
+    template_name = "stuManage/stu_info_table.html"
+    context_object_name = "stu_info"
+
 
 class student_info_Update(generic.UpdateView):
     model=student_info
