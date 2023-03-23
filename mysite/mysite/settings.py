@@ -98,7 +98,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = "Asia/Shanghai"
-
+SECRET_KEY = 'wy&_jk_y)djw88n&aa=bnb0d6ej+u2br#z=0))anczi#&#a67!'
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = False
 
