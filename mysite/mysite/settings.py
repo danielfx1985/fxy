@@ -143,9 +143,9 @@ DATABASES = {
         # DB name or path to database file if using sqlite3.
         "NAME": "schoolDB",
         # Not used with sqlite3.
-        "USER": "root",
+        "USER": "manager",
         # Not used with sqlite3.
-        "PASSWORD": "45855450",
+        "PASSWORD": "yu7uuyuhWZR!",
         # Set to empty string for localhost. Not used with sqlite3.
         "HOST": "",
         # Set to empty string for default. Not used with sqlite3.
