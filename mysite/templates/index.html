@@ -94,5 +94,23 @@
 
 {% endblock %}
 {% block tuji %}
-     <div class="col-md-5 col-md-offset-4 " style="padding-top:20px;background-color: #FFFFFF"><h3>校园图集</h3> ${{ page.gallery }}$ </div>
+    <style>
+        @media (max-width: 480px) {
+        #video {
+            display:none;
+        }
+
+
+    }
+
+    @media (min-width: 480px) {
+        #video {
+             display: block;
+        }
+    </style>
+     <div class="col-md-5 col-md-offset-4 " id="video" style="padding-top:20px;background-color: #FFFFFF"><h3>学院视频</h3> <video muted controls  width="700px"  loop="" class="myVideo" id="myVideo" style=" ">
+                    <source src="{% static "videos/xcp.mp4" %}" type="video/mp4">
+
+                    Your browser does not support HTML5 video.
+                </video></div>
 {% endblock %}

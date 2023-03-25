@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-{% load pages_tags mezzanine_tags i18n static  %}
+{% load pages_tags mezzanine_tags i18n static %}
 {% load blog_tags %}
 
 <head>
@@ -62,29 +62,61 @@
         display: none;
         z-index: 99999;
     }
+
     h3 {
-margin-top:10px;
-margin-bottom:30px;
-    }/*
-    h3::before{
-
-        content: url("{% static "img/timg.fw.png" %}");
+        margin-top: 10px;
+        margin-bottom: 30px;
     }
-    h3::after{
 
-        content: url("{% static "img/timg.fw.png" %}");
-    }*/
-    .navbar-nav::before{
+    /*
+        h3::before{
+
+            content: url("
+    {% static "img/timg.fw.png" %}
+    ");
+        }
+        h3::after{
+
+            content: url("
+    {% static "img/timg.fw.png" %}
+    ");
+        }*/
+    .navbar-nav::before {
         content: url("{% static "img/nav-l.fw.png" %}");
-        margin-right:5px;
-        margin-top:5px;
-         margin-bottom:-3px;
+        margin-right: 5px;
+        margin-top: 5px;
+        margin-bottom: -3px;
     }
-     .navbar-nav::after{
+
+    .navbar-nav::after {
         content: url("{% static "img/nav-r.fw.png" %}");
-         margin-left:5px;
-          margin-top:5px;
-         margin-bottom:-3px;
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: -3px;
+    }
+
+    @media (max-width: 480px) {
+        .desktop-image {
+            display: none;
+        }
+
+        .mobile-image {
+            display: block;
+        }
+    }
+
+    @media (min-width: 480px) {
+        .desktop-image {
+            display: block;
+        }
+
+        .mobile-image {
+            display: none;
+        }
+    }
+
+
+
     }
 </style>
 <body style="font-size:18px;background-color:white;background-image: url('{% static 'img/bg-5.fw.png' %}')"
@@ -93,7 +125,7 @@ margin-bottom:30px;
 <img src="{% static "img/gzwm.fw.png" %}" id="img1" onmouseover="document.getElementById('img2').style.display='block'
 ;" onmouseout="document.getElementById('img2').style.display='none'
 ;">
-<img src="{% static "img/gzh2v.png" %}" id="img2"  >
+<img src="{% static "img/gzh2v.png" %}" id="img2">
 
 
 <nav class=" navbar navbar-default  navbar-fixed-top" role="navigation" style="background: #9d1d1d">
@@ -138,26 +170,17 @@ margin-bottom:30px;
     <div class="row ">
         <div class="col-" style="display: block;background-image: url({% static "img/banner_bg.fw.png" %})">
 
-            <img id="image" style="display:block;margin: auto;"
-
+            <img id="image" style="margin: auto;"
+                 class="desktop-image"
                  src="{% static "img/logo_big.fw.png" %}"
 
             >
-            <div style="position: relative;">
-                <video id="video" muted controls width="860" autoplay="autoplay" loop="" class="myVideo" id="myVideo"
-                       style="transition: opacity 0.3s ease-out;
-        display:none;position: fixed;
-    text-align: center;
-    top: 28%;
-    left: 52%;
+            <img id="image" style="margin: auto;"
+                 class="mobile-image"
+                 src="{% static "img/logo_sm.png" %}"
 
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);">
-                    <source src="{% static "videos/xcp.mp4" %}" type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video>
+            >
 
-            </div>
 
         </div>
     </div>
@@ -181,7 +204,8 @@ margin-bottom:30px;
 
         </div>
         {% block news %}
-            <div class="col-sm-2  rounded-4  mx-auto text-xs text-center" style="margin-top:10px;margin-left:70px;height:400px;background-color: #fff8f6;border-width: 1px;border-style:dashed;border-color: #a9a9a9;">
+            <div class="col-sm-2  rounded-4  mx-auto text-xs text-center"
+                 style="margin-top:10px;margin-left:70px;height:400px;background-color: #fff8f6;border-width: 1px;border-style:dashed;border-color: #a9a9a9;">
 
                 {% blog_recent_posts category="学院公告" as posts %}
 
@@ -190,8 +214,8 @@ margin-bottom:30px;
 
                 {% for post in posts %}
 
-               <h4><a href="{{ post.get_absolute_url }}" style="color:#702727">{{ post.title }}        </a></h4>
-            <h5>发布时间：{{ post.publish_date |date:"Y-m-d"}}</h5>
+                    <h4><a href="{{ post.get_absolute_url }}" style="color:#702727">{{ post.title }}        </a></h4>
+                    <h5>发布时间：{{ post.publish_date |date:"Y-m-d"}}</h5>
 
                 {% endfor %}
 
@@ -202,33 +226,33 @@ margin-bottom:30px;
     </div>
 
     <div class="row">{% block dongtai %}{% endblock %}</div>
-<div class="row">{% block tuji %}{% endblock %}</div>
+    <div class="row">{% block tuji %}{% endblock %}</div>
 </div>
 
-    <footer style="padding:15px 0 15px;background-color: #3c1515;color:#faf6f1">
+<footer style="padding:15px 0 15px;background-color: #3c1515;color:#faf6f1">
 
-        <div class="container" style="font-size: 15px">
+    <div class="container" style="font-size: 15px">
 
 
-            <div class="row justify-content-center ">
+        <div class="row justify-content-center ">
 
-                <div class="col-md-2">
+            <div class="col-md-2">
                 <img src="{% static "img/smlogo.fw.png" %}">
                 <p class="site-info text-center">
 
                 </p>
-                </div>
-                 <div class="col-md-5 ">
-                    版权所有 © 云南佛学院西双版纳分院        <br>  备案号：
-                 </div>
-                 <div class="col-md-5 ">
-                         地址：西双版纳州总佛寺   <br>  邮编：
-            666100   <br> 电话：
-                 </div>
+            </div>
+            <div class="col-md-5 ">
+                版权所有 © 云南佛学院西双版纳分院 <br> 备案号：
+            </div>
+            <div class="col-md-5 ">
+                地址：西双版纳州总佛寺 <br> 邮编：
+                666100 <br> 电话：
             </div>
         </div>
+    </div>
 
-    </footer>
+</footer>
 
 {% block footer_js %}
     {% include "includes/footer_scripts.html" %}

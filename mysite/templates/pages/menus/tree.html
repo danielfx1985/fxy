@@ -3,9 +3,8 @@
 {% spaceless %}
 
 
-
     {% if page_branch_in_menu %}
-@@
+
         <ul class="nav nav-list navlist-menu-level-{{ branch_level }}">
             {% for page0 in page_branch %}
 
@@ -14,11 +13,14 @@
                         <a href="{% url "home" %}" style="color:#702727">{% trans "Home" %}</a>
                     </li>
                 {% endif %}
-#{{ page0.id }}--{{ page0.title }}
+
 
                 {% if page0.in_menu is True %}
 
-                    {% if page0.parent_id == page.parent_id or page0.id == page.parent_id or page.id == page0.parent_id   %}
+                    {% if page.parent.parent.parent_id == page0.id or page.parent.parent_id == page0.id or page0.id == page.parent_id or  page0.id == page.id or page0.parent_id == page.id or page0.parent.parent_id == page.id or page.parent_id == page0.parent_id and page0.parent_id != None%}
+
+                   {#   -{{ page.id }}/{{ page.parent_id }}/{{ page0.id }}/{{ page0.parent_id }} #}
+
                         <li class="
     {% if page0.is_current %} active{% endif %}
     {% if page0.is_current_or_ascendant %} active-branch{% endif %}
