@@ -85,7 +85,7 @@
         {% blog_recent_posts limit=4 category="学院动态" as dongtai %}
         {% for post in dongtai %}
 
-            <h4><a href="{{ post.get_absolute_url }}" style="color:#702727">{{ post.title }}</a></h4>
+            <h4><a href="{{ post.get_absolute_url }}" style="color:#702727">{{ post.title }}</a></h4><h5>发布时间：{{ post.publish_date |date:"Y-m-d"}}</h5>
             <p>{{ post.description }}</p>
 
 
